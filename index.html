@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Skill Swapper</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skill Swapper - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <script type="module">
+    // Firebase imports (v9 modular)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDZ5cS7SdFeuwlyYTEetZ4bjsuxQzpIIPw",
+      authDomain: "skill-swapper-10744.firebaseapp.com",
+      projectId: "skill-swapper-10744",
+      storageBucket: "skill-swapper-10744.appspot.com",
+      messagingSenderId: "899256600811",
+      appId: "1:899256600811:web:1575815bbf37428427d6ae"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    window.googleLogin = () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // User Info
+          const user = result.user;
+          console.log("User:", user.displayName);
+          // Redirect to main page
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          console.error("Login Error:", error);
+        });
+    };
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    img {
+      width: 150px;
+      animation: popIn 1s ease forwards;
+    }
+    .title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 20px;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #333;
+    }
+    .btn {
+      margin-top: 40px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      color: white;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 75, 43, 0.6);
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Skill Swapper</h1>
-  <a href="login.html">Login</a>
+  <img src="logo.jpg" alt="Skill Swapper Logo" />
+  <div class="title">Skill Swapper</div>
+  <div class="tagline">Exchange Skills. Grow Together.</div>
+  <button class="btn" onclick="googleLogin()">Google Se Continue</button>
 </body>
 </html>
