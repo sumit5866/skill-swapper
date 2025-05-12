@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #ff5f6d, #ffc3a0);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            color: white;
+        }
+        #logo {
+            font-size: 50px;
+            font-weight: 600;
+            animation: logoAnimation 2s ease-in-out;
+        }
+        .quote {
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 20px;
+            opacity: 0;
+            animation: quoteAnimation 2s ease-in-out forwards;
+            animation-delay: 2s;
+        }
+        .button-container {
+            margin-top: 30px;
+            opacity: 0;
+            animation: buttonAnimation 2s ease-in-out forwards;
+            animation-delay: 4s;
+        }
+        .button-container button {
+            background-color: #ff5f6d;
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 30px;
+            margin-top: 10px;
+        }
+
+        @keyframes logoAnimation {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes quoteAnimation {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonAnimation {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="logo">SkillX</div>
+        <div class="quote">"Unlock your skills, unlock your future!"</div>
+        <div class="button-container">
+            <button onclick="googleSignIn()">Sign Up with Google</button>
+            <button onclick="appleSignIn()">Sign Up with Apple</button>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+    <!-- Firebase Configuration (Put this in a separate file e.g., firebase-config.js) -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFiFGSMf-GjPwlOQdw_NUfyF7rQtok6s8",
+            authDomain: "skill-x-b38ec.firebaseapp.com",
+            projectId: "skill-x-b38ec",
+            storageBucket: "skill-x-b38ec.firebasestorage.app",
+            messagingSenderId: "1067580010790",
+            appId: "1:1067580010790:web:bb1410cbb7a8299e7e51e7",
+            measurementId: "G-EHNRFNSCFF"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
+
+    <!-- Sign-in Logic -->
+    <script>
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        googleProvider.addScope('profile');
+        googleProvider.addScope('email');
+
+        const googleSignIn = () => {
+            auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                const user = result.user;
+                window.location.href = 'home.html';  // Redirect to home after login
+            }).catch((error) => {
+                console.error(error.message);
+            });
+        };
+
+        const appleProvider = new firebase.auth.OAuthProvider('apple.com');
+
+        const appleSignIn = () => {
+            auth.signInWithPopup(appleProvider)
+            .then((result) => {
+                const user = result.user;
+                window.location.href = 'home.html';  // Redirect to home after login
+            }).catch((error) => {
+                console.error(error.message);
+            });
+        };
+    </script>
+</body>
+</html>

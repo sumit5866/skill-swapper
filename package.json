@@ -1,24 +1,29 @@
 {
-  "name": "skill-swapper",
-  "version": "0.1.0",
-  "private": true,
+  "name": "skillx-project",
+  "version": "1.0.0",
+  "description": "A project for SkillX app",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "lite-server",
+    "build": "echo \"No build step defined\" && exit 0",
+    "test": "echo \"No test defined\" && exit 0"
+  },
+  "keywords": [
+    "skillx",
+    "firebase",
+    "web-app"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
   },
   "dependencies": {
-    "firebase": "^11.6.1",
-    "next": "15.3.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "firebase": "^9.6.1",
+    "firebaseui": "^5.0.0",
+    "firebase-auth": "^9.6.1"
   },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "tailwindcss": "^4"
+  "engines": {
+    "node": ">=12.0.0"
   }
 }
